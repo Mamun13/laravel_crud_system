@@ -23,6 +23,7 @@ Route::get('/dashboard/create',[StudentController::class,'create'])->name('stude
 Route::get('/dashboard/view',[StudentController::class,'view'])->name('student.view');
 Route::get('/dashboard/edit/{id}',[StudentController::class,'edit'])->name('student.edit');
 Route::post('/dashboard/update/{id}',[StudentController::class,'update'])->name('student.update');
+Route::delete('/dashboard/destroy/{id}',[StudentController::class,'destroy'])->name('student.destroy');
 
 
 // require __DIR__.'/auth.php';

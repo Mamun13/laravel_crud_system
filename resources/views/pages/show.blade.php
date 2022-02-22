@@ -29,10 +29,22 @@
                     <td>{{$student->email}}</td>
                     <td>{{$student->course}}</td>
                     <td>{{$student->fee}}</td>
-                    <td class="mr-0">
-                      <a href="{{route('student.view')}}" class="btn btn-primary">View</a>
-                      <a href="{{route('student.edit',$student->id)}}" class="btn btn-success">Edit</a>
-                      <button class="btn btn-danger">Delete</button>
+                    <td>
+                      {{-- <a href="{{route('student.view')}}" class="btn btn-primary">View</a> --}}
+                      <div class="row">
+                        <div class="col-lg-2">
+                          <a href="{{route('student.edit',$student->id)}}" class="btn btn-success">Edit</a>
+                        </div>
+                        <div class="col-lg-2">
+                          <form action="{{route('student.destroy',$student->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" value="delete">Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                      
+                      
                     </td>
                   </tr>
                   @endforeach                    
