@@ -30,8 +30,8 @@
                     <td>{{$student->course}}</td>
                     <td>{{$student->fee}}</td>
                     <td class="mr-0">
-                      <button class="btn btn-primary">View</button>
-                      <button class="btn btn-success">Update</button>
+                      <a href="{{route('student.view')}}" class="btn btn-primary">View</a>
+                      <a href="{{route('student.edit',$student->id)}}" class="btn btn-success">Edit</a>
                       <button class="btn btn-danger">Delete</button>
                     </td>
                   </tr>

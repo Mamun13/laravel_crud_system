@@ -18,10 +18,6 @@ class StudentController extends Controller
     {
         return view('pages.dashboard');
     }
-    // public function list()
-    // {
-    //     return view('pages.view');
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +31,8 @@ class StudentController extends Controller
 
     public function view()
     {
-        return view('pages.view');
+        $students = Student::all();
+        return view('pages.view',compact('students'));
     }
 
     /**
@@ -91,11 +88,12 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::find($id);
+        return view('pages.edit',compact('student'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage. 
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -103,7 +101,22 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|string|max:20',
+            'email' => 'required|string|unique:students|max:50',
+            'course' => 'required|string',
+            'fee' => 'required|string',
+            'password' => 'required|string|min:5',
+        ]);
+        $student = Student::find($id);
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->course = $request->course;
+        $student->fee = $request->fee;
+        $student->fee = $request->fee;
+        $student->password = Hash::make($request->password);
+        $student->save();
+        return redirect()->route('student.show');
     }
 
     /**
